@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors({
   origin: [
     'https://frontend-ecommerce-r3sc3kwpz-sujal-dholes-projects.vercel.app/', 
-    'http://localhost:3000' // for local development
+    'http://localhost:4000' // for local development
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
