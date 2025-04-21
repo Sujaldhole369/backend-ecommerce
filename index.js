@@ -9,14 +9,7 @@ const cors = require("cors");
 const { error } = require("console");
 
 app.use(express.json());
-app.use(cors({
-  origin: [
-    'https://frontend-ecommerce-r3sc3kwpz-sujal-dholes-projects.vercel.app/', 
-    'http://localhost:4000' // for local development
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));;
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 // Database connection with mongodb
@@ -44,22 +37,15 @@ const upload = multer({ storage: storage });
 
 // API Upload Endpoints Images
 
-const staticPath = path.join(__dirname, 'upload/images');
-app.use("/images", express.static(staticPath, {
-  maxAge: '30d', // cache control
-  setHeaders: (res, path) => {
-    if (path.endsWith('.json')) {
-      res.setHeader('Content-Type', 'application/json');
-    }
-  }
-}));
+app.use("/images", express.static("upload/images"));
 
 app.post("/upload", upload.single("product"), (req, res) => {
   res.json({
     success: 1,
-    image_url: `${process.env.BASE_URL || `http://localhost:${port}`}/images/${req.file.filename}`,
+    image_url: `http://localhost:${port}/images/${req.file.filename}`,
   });
 });
+
 // Schema for Creating Products
 
 const Product = mongoose.model("Product", {
