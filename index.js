@@ -9,7 +9,7 @@ const cors = require("cors");
 const { error } = require("console");
 
 app.use(express.json());
-pp.use(cors({
+app.use(cors({
   origin: [
     'https://frontend-ecommerce-r3sc3kwpz-sujal-dholes-projects.vercel.app/', 
     'http://localhost:3000' // for local development
